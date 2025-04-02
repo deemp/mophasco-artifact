@@ -112,6 +112,11 @@ library
                       , RecordWildCards
                       , BlockArguments
 
+Flag nix
+    Description: Nix provides `build-depends` and `build-depend-tools`
+    Default: False
+    Manual: True
+
 library aterms
     hs-source-dirs:     aterm
     exposed-modules:    ATerms.ATerm
@@ -126,7 +131,8 @@ library aterms
                         utf8-string,
                         data-default,
                         ListLike
-    build-tool-depends: alex:alex, happy:happy
+    if !flag(nix)
+      build-tool-depends:  alex:alex, happy:happy
     default-language:   Haskell2010
     default-extensions: DerivingStrategies
                         TypeApplications
